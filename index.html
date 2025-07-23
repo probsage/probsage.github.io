@@ -29,12 +29,32 @@
           </svg>
         </a>
       </div>
-      <nav class="space-x-4">
+      <!-- Burger button (mobile) -->
+      <button id="burger" class="md:hidden flex flex-col justify-center items-center w-10 h-10 focus:outline-none" aria-label="Open menu">
+        <span class="block w-6 h-0.5 bg-gray-800 mb-1"></span>
+        <span class="block w-6 h-0.5 bg-gray-800 mb-1"></span>
+        <span class="block w-6 h-0.5 bg-gray-800"></span>
+      </button>
+      <!-- Desktop nav -->
+      <nav class="space-x-4 hidden md:flex">
         <a href="#templates" class="text-gray-700 hover:text-indigo-600">Templates</a>
         <a href="#custom" class="text-gray-700 hover:text-indigo-600">Custom Math</a>
         <a href="#about" class="text-gray-700 hover:text-indigo-600">About</a>
       </nav>
     </div>
+    <!-- Mobile nav -->
+    <nav id="mobileMenu" class="md:hidden fixed top-0 left-0 w-full h-full bg-white bg-opacity-95 z-50 flex-col items-center justify-center hidden transition-all duration-200">
+      <div class="flex justify-end p-4">
+        <button id="closeMobileMenu" class="w-10 h-10 flex items-center justify-center" aria-label="Close menu">
+          <svg class="w-6 h-6 text-gray-800" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
+      </div>
+      <div class="flex flex-col items-center space-y-6 mt-8">
+        <a href="#templates" class="text-gray-800 text-xl font-semibold hover:text-indigo-600" onclick="closeMenu()">Templates</a>
+        <a href="#custom" class="text-gray-800 text-xl font-semibold hover:text-indigo-600" onclick="closeMenu()">Custom Math</a>
+        <a href="#about" class="text-gray-800 text-xl font-semibold hover:text-indigo-600" onclick="closeMenu()">About</a>
+      </div>
+    </nav>
   </header>
 
   <!-- Hero Section -->
@@ -76,10 +96,10 @@
       <p class="text-gray-600 mb-6 max-w-2xl mx-auto">
         Ready-to-use math packs for slot games. Includes configuration, logic, and simulation outputs.
       </p>
-      <div class="grid md:grid-cols-3 gap-6">
+      <div class="grid justify-center md:grid-cols-3 gap-6">
 
         <!-- Classic 3x5 -->
-        <div class="max-w-md w-full rounded-lg shadow p-6 bg-gradient-to-br from-indigo-50 to-white border border-indigo-600 flex flex-col justify-between h-[500px]">
+        <div class="max-w-md w-full mx-auto rounded-lg shadow p-6 bg-gradient-to-br from-indigo-50 to-white border border-indigo-600 flex flex-col justify-between h-[500px]">
           <div>
             <h2 class="text-xl font-semibold text-gray-900">Classic 3x5</h2>
             <p class="text-left text-gray-700 mb-1">3x5 reels · 11 symbols + Wild & Scatter</p>
@@ -97,7 +117,7 @@
         </div>
 
         <!-- Scatter Collector -->
-        <div class="max-w-md w-full rounded-lg shadow p-6 bg-gradient-to-br from-indigo-50 to-white border border-indigo-600 flex flex-col justify-between h-[500px]">
+        <div class="max-w-md w-full mx-auto rounded-lg shadow p-6 bg-gradient-to-br from-indigo-50 to-white border border-indigo-600 flex flex-col justify-between h-[500px]">
           <div>
             <h2 class="text-xl font-semibold text-gray-900">Scatter Collector</h2>
             <p class="text-left text-gray-700 mb-1">4x5 reels · 9 symbols + Scatter</p>
@@ -115,7 +135,7 @@
         </div>
 
         <!-- Expanding Wilds -->
-        <div class="max-w-md w-full rounded-lg shadow p-6 bg-gradient-to-br from-indigo-50 to-white border border-indigo-600 flex flex-col justify-between h-[500px]">
+        <div class="max-w-md w-full mx-auto rounded-lg shadow p-6 bg-gradient-to-br from-indigo-50 to-white border border-indigo-600 flex flex-col justify-between h-[500px]">
           <div>
             <h2 class="text-xl font-semibold text-gray-900">Expanding Wilds</h2>
             <p class="text-left text-gray-700 mb-1">3x5 reels · 8 symbols + Wild</p>
@@ -166,5 +186,27 @@
   <footer class="py-6 border-t text-center text-sm text-gray-500">
     &copy; 2025 Probsage. All rights reserved.
   </footer>
+
+  <!-- Burger menu JS -->
+  <script>
+    const burger = document.getElementById('burger');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const closeBtn = document.getElementById('closeMobileMenu');
+
+    function openMenu() {
+      mobileMenu.classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeMenu() {
+      mobileMenu.classList.add('hidden');
+      document.body.style.overflow = '';
+    }
+    burger.addEventListener('click', openMenu);
+    closeBtn.addEventListener('click', closeMenu);
+    // Закрытие по клику вне меню или по Esc
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeMenu();
+    });
+  </script>
 </body>
 </html>
